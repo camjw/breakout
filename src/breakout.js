@@ -1,8 +1,8 @@
 var canvas = document.getElementById("breakoutCanvas");
 var context = canvas.getContext("2d");
 
-ball = new Ball;
-paddle = new Paddle;
+ball = new Ball();
+paddle = new Paddle();
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -25,11 +25,24 @@ function keyUpHandler(e) {
   }
 }
 
+function collisionDetection() {
+    for(var c=0; c<brickColumnCount; c++) {
+        for(var r=0; r<brickRowCount; r++) {
+            var b = bricks[c][r];
+            if(ball.x > b.x && ball.x < b.x+brickWidth && ball.y > b.y && ball.y < b.y+brickHeight) {
+                ball.speed_y = -ball.speed_y;
+            }
+        }
+    }
+}
+
 function draw() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   ball.updatePosition();
+  collisionDetection();
   paddle.drawPaddle();
   ball.checkBallCollision();
+  drawBricks();
 }
 
 setInterval(draw, 10);

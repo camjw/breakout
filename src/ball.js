@@ -1,6 +1,6 @@
 function Ball() {
-  this.x = 5
-  this.y = 5
+  this.x = 200
+  this.y = 150
   this.x_speed = 1
   this.y_speed = 1
   this.ballRadius = 7

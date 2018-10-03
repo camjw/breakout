@@ -1,34 +1,43 @@
-var brickRowCount = 7;
-var brickColumnCount = 9;
-var brickWidth = 50;
-var brickHeight = 15;
-var brickPadding = 5;
-var brickOffsetTop = 5;
-var brickOffsetLeft = 5;
+function Bricks() {
+  this.COUNT = { rows: 7, columns: 9 }
+  this.DIMENSIONS = { width: 50, height: 15 }
+  this.PADDING = 5
+  this.OFFSETS = { top: 5, left: 5 }
+  this.BRICK_SIZE = { width: 50, height: 15 }
+  this.generateBrickArray = function() {
+    var bricks = [];
 
-var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
-var bricks = [];
-
-for(var c=0; c<brickColumnCount; c++) {
-    bricks[c] = [];
-    for(var r=0; r<brickRowCount; r++) {
-        bricks[c][r] = { x: 0, y: 0 };
+    for(var c=0; c < this.COUNT.columns; c++) {
+      bricks[c] = [];
+      for(var r=0; r < this.COUNT.rows; r++) {
+        bricks[c][r] = { x: 0, y: 0, display: true};
+      }
     }
-}
+    return bricks
+  }
+  this.BRICK_ARRAY = this.generateBrickArray()
 
-function drawBricks() {
-    for(var c=0; c<brickColumnCount; c++) {
-        for(var r=0; r<brickRowCount; r++) {
-            var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-            var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
-            bricks[c][r].x = brickX;
-            bricks[c][r].y = brickY;
-            context.beginPath();
-            context.rect(brickX, brickY, brickWidth, brickHeight);
-            context.fillStyle = "#0095DD";
-            context.fill();
-            context.closePath();
+  this.drawBrick = function(context, x, y) {
+    context.beginPath();
+    context.rect(x, y, this.BRICK_SIZE.width, this.BRICK_SIZE.height);
+    context.fillStyle = "#0095DD";
+    context.fill();
+    context.closePath();
+  }
+
+  this.reDraw =  function(context) {
+    for(var c=0; c < this.COUNT.columns; c++) {
+        for(var r=0; r < this.COUNT.rows; r++) {
+            var brickX = (c * (this.BRICK_SIZE.width + this.PADDING))
+              + this.OFFSETS.left;
+            var brickY = (r * (this.BRICK_SIZE.height + this.PADDING))
+              + this.OFFSETS.top;
+            this.BRICK_ARRAY[c][r].x = brickX;
+            this.BRICK_ARRAY[c][r].y = brickY;
+            if (this.BRICK_ARRAY[c][r].display) {
+              this.drawBrick(context, brickX, brickY)
+            }
         }
     }
+  }
 }

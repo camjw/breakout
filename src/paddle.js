@@ -1,19 +1,28 @@
-function Paddle() {
-  this.paddleHeight = 10;
-  this.paddleWidth = 75;
-  this.paddleStart = (canvas.width - this.paddleWidth)/2;
-}
+function Paddle(canvas) {
+  this.DIMENSIONS = {height: 10, width: 75};
+  this.position = (canvas.width - this.DIMENSIONS.width)/2;
 
-Paddle.prototype.drawPaddle = function() {
-  context.beginPath();
-  context.rect(this.paddleStart, canvas.height  - this.paddleHeight, this.paddleWidth, this.paddleHeight);
-  context.fillStyle = "#0095DD";
-  context.fill();
-  context.closePath();
-  if(this.moveRight && this.paddleStart < canvas.width - this.paddleWidth) {
-    this.paddleStart += 7;
+  this.draw = function(context) {
+    context.beginPath();
+    context.rect(this.position, canvas.height - this.DIMENSIONS.height,
+      this.DIMENSIONS.width, this.DIMENSIONS.height);
+    context.fillStyle = "#0095DD";
+    context.fill();
+    context.closePath();
   }
-  else if(this.moveLeft && this.paddleStart > 0) {
-    this.paddleStart -= 7;
+
+  this.updatePosition = function(canvas, direction) {
+    if(direction == 'right' && this.position < canvas.width
+       - this.DIMENSIONS.width) {
+      this.position += 7;
+    }
+    else if(direction =='left' && this.position > 0) {
+      this.position -= 7;
+    }
+  }
+
+  this.reDraw = function(context, canvas, direction) {
+    this.draw(context);
+    this.updatePosition(canvas, direction);
   }
 }

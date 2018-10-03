@@ -26,7 +26,7 @@ describe("Ball", function() {
   it("should be able to be drawn on a canvas", function() {
     ball.draw(fakeContext)
     expect(fakeContext.beginPath).toHaveBeenCalled()
-    expect(fakeContext.arc).toHaveBeenCalled()
+    expect(fakeContext.arc).toHaveBeenCalledWith(200, 150, 7, 0, Math.PI*2)
     expect(fakeContext.fill).toHaveBeenCalled()
     expect(fakeContext.closePath).toHaveBeenCalled()
   });

@@ -1,11 +1,14 @@
 describe("Ball", function() {
   var ball;
+  var fakeContext;
   var fakeCanvas;
 
   beforeEach(function() {
     ball = new Ball();
     fakeContext = jasmine.createSpyObj('fakeContext', ['beginPath', 'arc',
       'fill', 'closePath']);
+    fakeCanvas = jasmine.createSpyObj('fakeCanvas', ['height', 'width'])
+    fakeCanvas.height = fakeCanvas.width = 100
   });
 
   it("should have starting position", function() {
@@ -40,8 +43,5 @@ describe("Ball", function() {
     ball.position = { x: 99, y: 99 }
     ball.checkCollisions(fakeCanvas)
     expect(ball.velocity).toEqual({ x: -1, y: -1 })
-  })
-
-
-
+  });
 });

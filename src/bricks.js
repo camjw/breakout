@@ -1,6 +1,6 @@
 function Bricks() {
   this.COUNT = { rows: 7, columns: 9 }
-  this.DIMENSIONS = { width: 50, height: 15 }
+  this.DIMENSIONS = { width: 45, height: 15 }
   this.PADDING = 5
   this.OFFSETS = { top: 5, left: 5 }
   this.BRICK_SIZE = { width: 50, height: 15 }
@@ -15,7 +15,7 @@ function Bricks() {
     }
     return bricks
   }
-  this.BRICK_ARRAY = this.generateBrickArray()
+  this.brickArray = this.generateBrickArray()
 
   this.drawBrick = function(context, x, y) {
     context.beginPath();
@@ -32,9 +32,9 @@ function Bricks() {
               + this.OFFSETS.left;
             var brickY = (r * (this.BRICK_SIZE.height + this.PADDING))
               + this.OFFSETS.top;
-            this.BRICK_ARRAY[c][r].x = brickX;
-            this.BRICK_ARRAY[c][r].y = brickY;
-            if (this.BRICK_ARRAY[c][r].display) {
+            this.brickArray[c][r].x = brickX;
+            this.brickArray[c][r].y = brickY;
+            if (this.brickArray[c][r].display) {
               this.drawBrick(context, brickX, brickY)
             }
         }

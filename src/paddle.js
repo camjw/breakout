@@ -11,12 +11,12 @@ function Paddle(canvas) {
     context.closePath();
   }
 
-  this.updatePosition = function(canvas, direction) {
-    if(direction == 'right' && this.position < canvas.width
+  this.updatePosition = function(canvas) {
+    if(this.moveRight && this.position < canvas.width
        - this.DIMENSIONS.width) {
       this.position += 7;
     }
-    else if(direction =='left' && this.position > 0) {
+    else if(this.moveLeft && this.position > 0) {
       this.position -= 7;
     }
   }

@@ -1,4 +1,4 @@
-describe("Paddle", function() {
+describe('Paddle', function() {
   var paddle;
   var fakeContext;
   var fakeCanvas;
@@ -11,7 +11,7 @@ describe("Paddle", function() {
     paddle = new Paddle(fakeCanvas);
   });
 
-  it("has dimensions", function() {
+  it('has dimensions', function() {
     expect(paddle.DIMENSIONS).toEqual({height: 10, width: 75})
   });
 
@@ -19,7 +19,7 @@ describe("Paddle", function() {
     expect(paddle.position).toEqual(12.5)
   });
 
-  it("can be drawn", function() {
+  it('can be drawn', function() {
     paddle.draw(fakeContext)
     expect(fakeContext.beginPath).toHaveBeenCalled()
     expect(fakeContext.rect).toHaveBeenCalledWith(12.5, 90, 75, 10)
@@ -27,8 +27,9 @@ describe("Paddle", function() {
     expect(fakeContext.closePath).toHaveBeenCalled()
   });
 
-  it("can update its position", function() {
-    paddle.updatePosition(fakeCanvas, 'left')
+  it('can update its position', function() {
+    paddle.moveLeft = true
+    paddle.updatePosition(fakeCanvas)
     expect(paddle.position).toEqual(5.5)
   });
 

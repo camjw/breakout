@@ -1,4 +1,4 @@
-describe("Ball", function() {
+describe('Ball', function() {
   var ball;
   var fakeContext;
   var fakeCanvas;
@@ -11,19 +11,19 @@ describe("Ball", function() {
     fakeCanvas.height = fakeCanvas.width = 100
   });
 
-  it("should have starting position", function() {
+  it('should have starting position', function() {
     expect(ball.position).toEqual({x: 200, y: 150})
   });
 
-  it("should have starting veloicity", function() {
+  it('should have starting velocity', function() {
     expect(ball.velocity).toEqual({x: 1, y: 1})
   });
 
-  it("should have a radius", function() {
+  it('should have a radius', function() {
     expect(ball.RADIUS).toEqual(7)
   });
 
-  it("should be able to be drawn on a canvas", function() {
+  it('should be able to be drawn on a canvas', function() {
     ball.draw(fakeContext)
     expect(fakeContext.beginPath).toHaveBeenCalled()
     expect(fakeContext.arc).toHaveBeenCalledWith(200, 150, 7, 0, Math.PI*2)
@@ -31,15 +31,15 @@ describe("Ball", function() {
     expect(fakeContext.closePath).toHaveBeenCalled()
   });
 
-  it("should be able to be redrawn", function() {
-    spyOn(ball, "updatePosition")
-    spyOn(ball, "draw")
+  it('should be able to be redrawn', function() {
+    spyOn(ball, 'updatePosition')
+    spyOn(ball, 'draw')
     ball.reDraw(fakeContext)
     expect(ball.updatePosition).toHaveBeenCalled()
     expect(ball.draw).toHaveBeenCalledWith(fakeContext)
   });
 
-  it("Knows when it has collided with a wall", function() {
+  it('Knows when it has collided with a wall', function() {
     ball.position = { x: 99, y: 99 }
     ball.checkCollisions(fakeCanvas)
     expect(ball.velocity).toEqual({ x: -1, y: -1 })

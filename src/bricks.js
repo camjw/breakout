@@ -16,28 +16,28 @@ function Bricks() {
     return bricks
   }
   this.brickArray = this.generateBrickArray()
+}
 
-  this.drawBrick = function(context, x, y) {
-    context.beginPath();
-    context.rect(x, y, this.BRICK_SIZE.width, this.BRICK_SIZE.height);
-    context.fillStyle = "#0095DD";
-    context.fill();
-    context.closePath();
-  }
+Bricks.prototype.drawBrick = function(context, x, y) {
+  context.beginPath();
+  context.rect(x, y, this.BRICK_SIZE.width, this.BRICK_SIZE.height);
+  context.fillStyle = "#0095DD";
+  context.fill();
+  context.closePath();
+}
 
-  this.reDraw =  function(context) {
-    for(var c=0; c < this.COUNT.columns; c++) {
-        for(var r=0; r < this.COUNT.rows; r++) {
-            var brickX = (c * (this.BRICK_SIZE.width + this.PADDING))
-              + this.OFFSETS.left;
-            var brickY = (r * (this.BRICK_SIZE.height + this.PADDING))
-              + this.OFFSETS.top;
-            this.brickArray[c][r].x = brickX;
-            this.brickArray[c][r].y = brickY;
-            if (this.brickArray[c][r].display) {
-              this.drawBrick(context, brickX, brickY)
-            }
-        }
+Bricks.prototype.reDraw = function(context) {
+  for(var c=0; c < this.COUNT.columns; c++) {
+    for(var r=0; r < this.COUNT.rows; r++) {
+      var brickX = (c * (this.BRICK_SIZE.width + this.PADDING))
+      + this.OFFSETS.left;
+      var brickY = (r * (this.BRICK_SIZE.height + this.PADDING))
+      + this.OFFSETS.top;
+      this.brickArray[c][r].x = brickX;
+      this.brickArray[c][r].y = brickY;
+      if (this.brickArray[c][r].display) {
+        this.drawBrick(context, brickX, brickY)
+      }
     }
   }
 }

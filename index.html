@@ -8,7 +8,39 @@
 <script src='src/ball.js'></script>
 <script src='src/paddle.js'/></script>
 <script src='src/bricks.js'/></script>
+<script src='src/game.js'></script>
 <script src='src/breakout.js'/></script>
 
+<script>
+
+  game = new Game()
+  console.log(game.paddle)
+
+  keyDownHandler = function(e) {
+    if(e.keyCode == 39) {
+      game.paddle.moveRight = true;
+    }
+    else if(e.keyCode == 37) {
+      game.paddle.moveLeft = true;
+    }
+  }
+
+  keyUpHandler = function(e) {
+    if(e.keyCode == 39) {
+      game.paddle.moveRight = false;
+    }
+    else if(e.keyCode == 37) {
+      game.paddle.moveLeft = false;
+    }
+  }
+
+  document.addEventListener("keydown", keyDownHandler, false);
+  document.addEventListener("keyup", keyUpHandler, false);
+
+  setInterval(game.run, 10);
+  setInterval(game.collisionDetection, 10)
+
+
+</script>
 
 </body>

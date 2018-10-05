@@ -1,17 +1,10 @@
 function Game() {
-  canvas = document.getElementById('breakoutCanvas');
-  context = canvas.getContext("2d");
+  this.canvas = document.getElementById('breakoutCanvas');
+  this.context = this.canvas.getContext("2d");
 
-  ball = new Ball();
-  bricks = new Bricks();
-  paddle = new Paddle(canvas);
-
-  this.ball = ball
-  this.canvas = canvas;
-  this.context = context;
-  this.bricks = bricks;
-  this.paddle = paddle;
-
+  this.ball = new Ball();
+  this.bricks = new Bricks();
+  this.paddle = new Paddle(this.canvas);
 }
 
 Game.prototype.brickBallCollisionDetection = function() {
@@ -87,16 +80,19 @@ Game.prototype.log = function() {
 Game.prototype.run = function() {
 
 	// Clear the canvas.
-	context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+  // Check all collisions
+  this.brickBallCollisionDetection();
+  this.ballPaddleCollisionDetection();
+  
 	// Draw the ball.
-  this.ball.checkCollisions(canvas);
-  this.ball.reDraw(context);
+  this.ball.checkCollisions(this.canvas);
+  this.ball.reDraw(this.context);
 
   // Draw the paddle.
-  this.paddle.reDraw(context, canvas);
+  this.paddle.reDraw.call(this.paddle, this.context, this.canvas);
 
   // Draw the bricks.
-  this.bricks.reDraw(context);
-
+  this.bricks.reDraw(this.context);
 }

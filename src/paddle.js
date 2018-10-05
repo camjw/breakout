@@ -1,7 +1,7 @@
 function Paddle(canvas) {
   this.DIMENSIONS = {height: 10, width: 75};
   this.position = (canvas.width - this.DIMENSIONS.width)/2;
-  this.color = "#0095DD"
+  this.color = "#c0c0c0"
 }
 
 Paddle.prototype.draw = function(context) {

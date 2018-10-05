@@ -12,34 +12,34 @@
 <script src='src/breakout.js'/></script>
 
 <script>
+    game = new Game()
 
-  game = new Game()
-  console.log(game.paddle)
-
-  keyDownHandler = function(e) {
-    if(e.keyCode == 39) {
-      game.paddle.moveRight = true;
+    keyDownHandler = function(e) {
+      if(e.keyCode == 39) {
+        game.paddle.moveRight = true;
+      }
+      else if(e.keyCode == 37) {
+        game.paddle.moveLeft = true;
+      }
     }
-    else if(e.keyCode == 37) {
-      game.paddle.moveLeft = true;
+
+    keyUpHandler = function(e) {
+      if(e.keyCode == 39) {
+        game.paddle.moveRight = false;
+      }
+      else if(e.keyCode == 37) {
+        game.paddle.moveLeft = false;
+      }
     }
-  }
 
-  keyUpHandler = function(e) {
-    if(e.keyCode == 39) {
-      game.paddle.moveRight = false;
-    }
-    else if(e.keyCode == 37) {
-      game.paddle.moveLeft = false;
-    }
-  }
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
 
-  document.addEventListener("keydown", keyDownHandler, false);
-  document.addEventListener("keyup", keyUpHandler, false);
-
-  setInterval(game.run, 10);
-  setInterval(game.collisionDetection, 10)
-
+    game.run.call(game)
+    setInterval(game.brickBallCollisionDetection, 10)
+    setInterval(game.ballPaddleCollisionDetection, 10)
+    setInterval(game.isGameOver, 10)
+    setInterval(game.isGameWon, 10)
 
 </script>
 

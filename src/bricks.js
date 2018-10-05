@@ -1,16 +1,25 @@
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 function Bricks() {
-  this.COUNT = { rows: 7, columns: 9 }
-  this.DIMENSIONS = { width: 45, height: 15 }
+  this.COUNT = { rows: 8, columns: 12 }
   this.PADDING = 5
   this.OFFSETS = { top: 5, left: 5 }
-  this.BRICK_SIZE = { width: 50, height: 15 }
+  this.BRICK_SIZE = { width: 34, height: 12 }
+
   this.generateBrickArray = function() {
     var bricks = [];
 
     for(var c=0; c < this.COUNT.columns; c++) {
       bricks[c] = [];
       for(var r=0; r < this.COUNT.rows; r++) {
-        bricks[c][r] = { x: 0, y: 0, display: true};
+        bricks[c][r] = { x: 0, y: 0, display: true, color: getRandomColor()};
       }
     }
     return bricks
@@ -18,10 +27,10 @@ function Bricks() {
   this.brickArray = this.generateBrickArray()
 }
 
-Bricks.prototype.drawBrick = function(context, x, y) {
+Bricks.prototype.drawBrick = function(context, x, y, color) {
   context.beginPath();
   context.rect(x, y, this.BRICK_SIZE.width, this.BRICK_SIZE.height);
-  context.fillStyle = "#0095DD";
+  context.fillStyle = color;
   context.fill();
   context.closePath();
 }
@@ -36,7 +45,7 @@ Bricks.prototype.reDraw = function(context) {
       this.brickArray[c][r].x = brickX;
       this.brickArray[c][r].y = brickY;
       if (this.brickArray[c][r].display) {
-        this.drawBrick(context, brickX, brickY)
+        this.drawBrick(context, brickX, brickY, this.brickArray[c][r].color)
       }
     }
   }

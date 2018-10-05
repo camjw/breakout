@@ -1,6 +1,6 @@
 
 //
-// if(this.position.consox > paddle.paddleStart
+// if(this.position.x > paddle.paddleStart
 //   && this.position.x < paddle.paddleStart + paddle.paddleWidth
 //   && this.position.y > canvas.height - this.RADIUS - paddle.paddleHeight) {
 //   this.velocity.y = -this.velocity.y

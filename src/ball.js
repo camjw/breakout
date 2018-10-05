@@ -1,8 +1,8 @@
 function Ball() {
   this.position = { x: 200, y: 150 }
   this.velocity = { x: 1, y: 1 }
-  this.RADIUS = 7
-  this.color = "#0095DD"
+  this.RADIUS = 3
+  this.color = '#000000'
 }
 
 Ball.prototype.draw = function(context) {
